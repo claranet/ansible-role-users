@@ -1,0 +1,12 @@
+---
+- name: "create_users | create user {{ item.key }}"
+  user:
+    name: "{{ item.key }}"
+    append: "{{ item.value.append | default(true) }}"
+    shell: "{{ item.value.shell | default('/bin/bash') }}"
+    createhome: "{{ item.value.createhome | default(true) }}"
+    home: "{{ item.value.home | default('/home/' + item.key) }}"
+    password: "{{ item.value.password | default('*') }}"
+    uid: "{{ item.value.uid | default(omit) }}"
+    group: "{{ item.value.group | default(omit) }}"
+    groups: "{{ item.value.groups | default(omit) }}"

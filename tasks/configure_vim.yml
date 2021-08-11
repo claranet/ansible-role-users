@@ -1,0 +1,9 @@
+---
+- name: "configure_vim | {{ item.key }}/.vimrc"
+  template:
+    src: "{{ user_vimrc_template }}"
+    dest: "~{{ item.key }}/.vimrc"
+    owner: "{{ item.key }}"
+    group: "{{ item.value.group | default(item.key) }}"
+    mode: 0600
+  when: "'vimrc' in item.value"

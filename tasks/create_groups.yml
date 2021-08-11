@@ -1,0 +1,12 @@
+---
+- name: "create_groups | ensure {{ item.key }}/.bash_history is NOT immutable"
+  file:
+    path: "~{{ item.key }}/.bash_history"
+    attr: -a
+  changed_when: false
+
+- name: "create_groups | create group {{ item.value.group }}"
+  group:
+    name: "{{ item.value.group }}"
+    gid: "{{ item.value.gid | default(omit) }}"
+  when: "'group' in item.value"

@@ -1,0 +1,11 @@
+"
+" {{ ansible_managed }}
+"
+
+{% for line in user_default_vimrc %}
+{{ line }}
+{% endfor %}
+
+{% for line in item.value.vimrc %}
+{{ line }}
+{% endfor %}
