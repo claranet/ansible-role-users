@@ -1,9 +1,15 @@
 ---
-- name: "create_groups | ensure {{ item.key }}/.bash_history is NOT immutable"
+- name: "create_groups | ensure {{ item.value.home }}/.bash_history exists"
+  stat:
+    path: "{{ item.value.home }}/.bash_history"
+  register: history
+
+- name: "create_groups | ensure {{ item.value.home }}/.bash_history is NOT immutable"
   file:
-    path: "~{{ item.key }}/.bash_history"
+    path: "{{ item.value.home }}/.bash_history"
     attr: -a
   changed_when: false
+  when: history.stat.exists
 
 - name: "create_groups | create group {{ item.value.group }}"
   group:

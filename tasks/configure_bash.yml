@@ -1,4 +1,4 @@
-- name: "configure_bash | {{ item.key }}/.bashrc"
+- name: "configure_bash | {{ item.value.home }}/.bashrc"
   template:
     src: "{{ user_bashrc_template }}"
     dest: "~{{ item.key }}/.bashrc"
@@ -7,7 +7,7 @@
     mode: 0600
   when: "'bashrc' in item.value"
 
-- name: "configure_bash | ensure {{ item.key }}/.bash_history is immutable"
+- name: "configure_bash | ensure {{ item.value.home }}/.bash_history is immutable"
   file:
     path: "~{{ item.key }}/.bash_history"
     attr: a
