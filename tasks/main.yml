@@ -1,1 +1,31 @@
 ---
+# install packages
+- include_tasks: install.yml
+
+# create users and groups
+- include_tasks: create_groups.yml
+  loop: "{{ users | dict2items }}"
+  loop_control:
+    label: "{{ item.key }}"
+- include_tasks: create_users.yml
+  loop: "{{ users | dict2items }}"
+  loop_control:
+    label: "{{ item.key }}"
+
+# configure user's profile
+- include_tasks: configure_bash.yml
+  loop: "{{ users | dict2items }}"
+  loop_control:
+    label: "{{ item.key }}"
+- include_tasks: configure_ssh.yml
+  loop: "{{ users | dict2items }}"
+  loop_control:
+    label: "{{ item.key }}"
+- include_tasks: configure_vim.yml
+  loop: "{{ users | dict2items }}"
+  loop_control:
+    label: "{{ item.key }}"
+- include_tasks: configure_profile.yml
+  loop: "{{ users | dict2items }}"
+  loop_control:
+    label: "{{ item.key }}"

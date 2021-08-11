@@ -1,0 +1,7 @@
+#
+# {{ ansible_managed }}
+#
+
+{% for key in item.value.authorized_keys -%}
+    {{key}}
+{% endfor -%}

@@ -1,2 +1,66 @@
 ---
 # defaults file for role
+
+## user management
+users: {}
+
+## packages to install
+packages: ["bash","bash-completion","vim","e2fsprogs"]
+
+## custom dotfiles
+user_bashrc_template: "users/bashrc.j2"
+user_ssh_config_template: "users/ssh_config.j2"
+user_vimrc_template: "users/vimrc.j2"
+user_profile_template: "users/profile.j2"
+
+## dotfiles management
+
+### umask management
+umask: "022"
+
+### global env vars
+lang: "POSIX"
+editor: "vim"
+shell: "/bin/bash"
+ls_options: "--color=auto"
+
+### bashrc vars
+bashrc_histcontrol: "ignoreboth"
+bashrc_histsize: "5000"
+bashrc_histfilesize: "20000"
+bashrc_histtimeformat: "%d-%m-%y %T "
+
+### bashrc management
+user_default_bashrc:
+  - '# default umask'
+  - umask {{ umask }}
+  - '# env vars'
+  - export LANG={{ lang }}
+  - export EDITOR={{ editor }}
+  - export LS_OPTIONS={{ ls_options }}
+  - export HISTCONTROL={{ bashrc_histcontrol }}
+  - export HISTSIZE={{ bashrc_histsize }}
+  - export HISTFILESIZE={{ bashrc_histfilesize }}
+  - export HISTTIMEFORMAT="{{ bashrc_histtimeformat }}"
+  - '# aliases'
+  - eval `dircolors -b`
+  - alias ls='ls $LS_OPTIONS'
+  - alias ll='ls $LS_OPTIONS -alh'
+  - alias l=ll
+  - alias tailf='tail -f'
+
+user_default_vimrc:
+  - '" standard'
+  - set paste
+  - set noai
+  - set nocompatible
+  - set hlsearch
+  - set background=dark
+  - '" color'
+  - syntax on
+
+user_default_profile:
+  - '# lock histfile'
+  - readonly HISTFILE
+  - '# default shell'
+  - export SHELL={{ shell }}
