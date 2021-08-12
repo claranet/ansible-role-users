@@ -10,4 +10,6 @@ platforms:
 provisioner:
   name: ansible
 verifier:
-  name: ansible
+  name: testinfra
+lint: |
+  ansible-lint

@@ -1,5 +1,6 @@
 galaxy_info:
   role_name: "users"
+  namespace: "claranet"
   description: "Configure system's users"
   author: "Claranet"
   company: "Claranet France"

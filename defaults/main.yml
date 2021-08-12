@@ -5,7 +5,7 @@
 users: {}
 
 ## packages to install
-packages: ["bash","bash-completion","vim","e2fsprogs"]
+packages: ["bash", "bash-completion", "vim", "e2fsprogs"]
 
 ## custom dotfiles
 user_bashrc_template: "users/bashrc.j2"

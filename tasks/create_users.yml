@@ -7,7 +7,7 @@
 - name: "create_users | create user {{ item.key }}"
   user:
     name: "{{ item.key }}"
-    append: "{{ item.value.append | default(true) }}"
+    append: "{{ item.value.append | default(true if item.value.groups|default([])|length > 0 else omit) }}"
     shell: "{{ item.value.shell | default('/bin/bash') }}"
     createhome: "{{ item.value.createhome | default(true) }}"
     home: "{{ item.value.home | default('/home/' + item.key) }}"
