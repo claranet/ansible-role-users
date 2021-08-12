@@ -1,5 +1,5 @@
 ---
-- name: "configure_ssh | {{ item.key }}/.ssh/"
+- name: "configure_ssh | ~{{ item.key }}/.ssh/"
   file:
     path: "~{{ item.key }}/.ssh/"
     owner: "{{ item.key }}"
@@ -8,7 +8,7 @@
     state: directory
   when: "'authorized_keys' in item.value"
 
-- name: "configure_ssh | {{ item.key }}/.ssh/authorized_keys"
+- name: "configure_ssh | ~{{ item.key }}/.ssh/authorized_keys"
   template:
     dest: "~{{ item.key }}/.ssh/authorized_keys"
     src: users/authorized_keys.j2
@@ -17,7 +17,7 @@
     mode: 0600
   when: "'authorized_keys' in item.value"
 
-- name: "configure_ssh | {{ item.key }}/.ssh/config"
+- name: "configure_ssh | ~{{ item.key }}/.ssh/config"
   template:
     src: "{{ user_ssh_config_template }}"
     dest: "~{{ item.key }}/.ssh/config"

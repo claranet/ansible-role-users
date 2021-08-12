@@ -1,4 +1,4 @@
-- name: "configure_bash | {{ item.key }}/.bashrc"
+- name: "configure_bash | ~{{ item.key }}/.bashrc"
   template:
     src: "{{ user_bashrc_template }}"
     dest: "~{{ item.key }}/.bashrc"
@@ -7,11 +7,7 @@
     mode: 0600
   when: "'bashrc' in item.value"
 
-- name: "configure_bash | ensure {{ item.key }}/.bash_history is immutable"
-  file:
-    path: "~{{ item.key }}/.bash_history"
-    attr: a
-    state: touch
-    owner: "{{ item.key }}"
-    group: "{{ item.value.group | default(item.key) }}"
-  changed_when: false
+- name: "configure_bash | include hardening.yml"
+  include_tasks: hardening.yml
+  vars:
+    status: "set_bash"

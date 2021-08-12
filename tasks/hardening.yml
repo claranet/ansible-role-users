@@ -1,0 +1,37 @@
+---
+- name: "hardening | ensure ~{{ item.key }}/.bash_history exists"
+  stat:
+    path: "~{{ item.key }}/.bash_history"
+  register: history
+
+- name: "hardening | ensure ~{{ item.key }}/.bash_history is NOT immutable"
+  file:
+    path: "~{{ item.key }}/.bash_history"
+    attr: -a
+    state: touch
+  changed_when: false
+  when:
+    - history.stat.exists
+    - status == "unset" or
+      status == "set_bash"
+
+- name: "hardening | ensure ~{{ item.key }}/.bash_history is immutable"
+  file:
+    path: "~{{ item.key }}/.bash_history"
+    attr: a
+    state: touch
+    owner: "{{ item.key }}"
+    group: "{{ item.value.group | default(item.key) }}"
+  changed_when: false
+  when: status == "set_bash"
+
+- name: "hardening | ~{{ item.key }}/.profile"
+  template:
+    src: "{{ user_profile_template }}"
+    dest: "~{{ item.key }}/.profile"
+    owner: "root"
+    group: "root"
+    mode: 0644
+  when:
+    - "'profile' in item.value"
+    - status == "set_profile"
