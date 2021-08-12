@@ -1,15 +1,8 @@
 ---
-- name: "create_groups | ensure {{ item.value.home }}/.bash_history exists"
-  stat:
-    path: "{{ item.value.home }}/.bash_history"
-  register: history
-
-- name: "create_groups | ensure {{ item.value.home }}/.bash_history is NOT immutable"
-  file:
-    path: "{{ item.value.home }}/.bash_history"
-    attr: -a
-  changed_when: false
-  when: history.stat.exists
+- name: "create_groups | include hardening.yml"
+  include_tasks: hardening.yml
+  vars:
+    status: unset
 
 - name: "create_groups | create group {{ item.value.group }}"
   group:

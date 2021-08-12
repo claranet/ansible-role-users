@@ -1,9 +1,5 @@
 ---
-- name: "configure_profile | {{ item.key }}/.profile"
-  template:
-    src: "{{ user_profile_template }}"
-    dest: "~{{ item.key }}/.profile"
-    owner: "root"
-    group: "root"
-    mode: 0644
-  when: "'profile' in item.value"
+- name: "configure_profile | include hardening.yml"
+  include_tasks: hardening.yml
+  vars:
+    status: set_profile
