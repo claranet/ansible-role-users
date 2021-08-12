@@ -1,4 +1,4 @@
-- name: "configure_bash | {{ item.value.home }}/.bashrc"
+- name: "configure_bash | ~{{ item.key }}/.bashrc"
   template:
     src: "{{ user_bashrc_template }}"
     dest: "~{{ item.key }}/.bashrc"
@@ -10,4 +10,4 @@
 - name: "configure_bash | include hardening.yml"
   include_tasks: hardening.yml
   vars:
-    status: set_bash
+    status: "set_bash"

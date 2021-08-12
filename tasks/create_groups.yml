@@ -1,9 +1,4 @@
 ---
-- name: "create_groups | include hardening.yml"
-  include_tasks: hardening.yml
-  vars:
-    status: unset
-
 - name: "create_groups | create group {{ item.value.group }}"
   group:
     name: "{{ item.value.group }}"

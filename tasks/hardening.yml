@@ -1,21 +1,23 @@
 ---
-- name: "hardening | ensure {{ item.value.home }}/.bash_history exists"
+- name: "hardening | ensure ~{{ item.key }}/.bash_history exists"
   stat:
-    path: "{{ item.value.home }}/.bash_history"
+    path: "~{{ item.key }}/.bash_history"
   register: history
 
-- name: "hardening | ensure {{ item.value.home }}/.bash_history is NOT immutable"
+- name: "hardening | ensure ~{{ item.key }}/.bash_history is NOT immutable"
   file:
-    path: "{{ item.value.home }}/.bash_history"
+    path: "~{{ item.key }}/.bash_history"
     attr: -a
+    state: touch
   changed_when: false
   when:
     - history.stat.exists
-    - status == "unset"
+    - status == "unset" or
+      status == "set_bash"
 
-- name: "hardening | ensure {{ item.value.home }}/.bash_history is immutable"
+- name: "hardening | ensure ~{{ item.key }}/.bash_history is immutable"
   file:
-    path: "{{ item.value.home }}/.bash_history"
+    path: "~{{ item.key }}/.bash_history"
     attr: a
     state: touch
     owner: "{{ item.key }}"
@@ -23,10 +25,10 @@
   changed_when: false
   when: status == "set_bash"
 
-- name: "hardening | {{ item.value.home }}/.profile"
+- name: "hardening | ~{{ item.key }}/.profile"
   template:
     src: "{{ user_profile_template }}"
-    dest: "{{ item.value.home }}/.profile"
+    dest: "~{{ item.key }}/.profile"
     owner: "root"
     group: "root"
     mode: 0644

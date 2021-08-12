@@ -1,5 +1,5 @@
 ---
-- name: "configure_vim | {{ item.key }}/.vimrc"
+- name: "configure_vim | ~{{ item.key }}/.vimrc"
   template:
     src: "{{ user_vimrc_template }}"
     dest: "~{{ item.key }}/.vimrc"
