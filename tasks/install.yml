@@ -1,4 +1,9 @@
 ---
+- name: "install | update APT sources"
+  apt:
+    update_cache: true
+  when: ansible_os_family == "Debian"
+
 - name: "install | requisites packages"
   package:
     name: "{{ item }}"
