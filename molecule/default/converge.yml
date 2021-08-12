@@ -7,9 +7,9 @@
     - role: claranet.users
       vars:
         users:
-          claranet:
-            home: /home/claranet
-            group: adm
+          claranet1:
+            home: /home/claranet1
+            group: claranet1
             password: "*"
             bashrc:
               - 'export PS1=''\[\033[01;31m\]\u\[\033[00m\]@$(hostname -f) \[\033[01;34m\]\w \$\[\033[00m\] '''
@@ -17,4 +17,9 @@
               - "color desert"
             ssh_config:
               'mysrv*':
-                identityFile: /home/user/.ssh/user
+                identityFile: /home/claranet1/.ssh/user
+
+          claranet2:
+            group: adm
+            groups:
+              - daemon

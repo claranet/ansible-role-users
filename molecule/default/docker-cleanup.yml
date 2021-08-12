@@ -4,22 +4,8 @@
   become: true
   become_user: root
   gather_facts: false
-  vars:
-    user: claranet
   tasks:
-    - block:
-        - name: "ensure ~{{ user }}/.bash_history exists"
-          stat:
-            path: "~{{ user }}/.bash_history"
-          register: history
-
-        - name: "ensure ~{{ user }}/.bash_history is NOT immutable"
-          file:
-            path: "~{{ user }}/.bash_history"
-            attr: -a
-            state: touch
-          changed_when: false
-          when:
-            - history is succeeded
-            - history.stat.exists | default(false)
-      ignore_unreachable: true
+    - include_tasks: "{{ playbook_dir }}/docker-cleanup/main.yml"
+      loop:
+        - claranet1
+        - claranet2

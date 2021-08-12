@@ -10,7 +10,6 @@
     - SYS_ADMIN
     - SYS_TIME
     - LINUX_IMMUTABLE
-  command: "/sbin/init"
 
 dependency:
   name: galaxy
