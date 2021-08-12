@@ -33,5 +33,5 @@
     group: "root"
     mode: 0644
   when:
-    - "'profile' in item.value"
+    - (item.value|selectattr("profile", "defined")|list|length > 0) or (user_default_profile|length > 0)
     - status == "set_profile"

@@ -3,6 +3,8 @@
   apt:
     update_cache: true
   when: ansible_os_family == "Debian"
+  tags:
+    - molecule-idempotence-notest
 
 - name: "install | requisites packages"
   package:

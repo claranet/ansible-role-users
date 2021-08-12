@@ -34,6 +34,6 @@ fi
 {{ line }}
 {% endfor %}
 
-{% for line in item.value.profile %}
+{% for line in item.value|selectattr("profile", "defined")|list %}
 {{ line }}
 {% endfor %}
