@@ -1,0 +1,6 @@
+---
+- name: "Update APT sources"
+  apt:
+    update_cache: true
+  tags:
+    - molecule-idempotence-notest
