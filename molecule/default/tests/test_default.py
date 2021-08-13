@@ -75,7 +75,7 @@ def test_claranet2_bash_history_file(host):
 def test_installed_packages(host):
     assert host.package("bash").is_installed
     assert host.package("bash-completion").is_installed
-    if str(host.system_info.distribution).lower() in ('centos', 'redhat'):
+    if str(host.system_info.distribution).lower() in ('centos', 'redhat', 'amzn'):
         assert host.package("vim-enhanced").is_installed
     else:
         assert host.package("vim").is_installed

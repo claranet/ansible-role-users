@@ -36,7 +36,10 @@ provisioner:
       cleanup: docker-cleanup.yml
 verifier:
   name: testinfra
+  lint:
+    name: flake8
   options:
     verbose: true
+    s: true
 lint: |
   ansible-lint
