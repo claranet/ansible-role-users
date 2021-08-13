@@ -29,7 +29,7 @@ measures.
 
 The following files are set up with the following permissions:
 - **~/.bashrc**: mode 0600
-- **~/bash_history**: chattr +a
+- **~/.bash_history**: mode 600 + chattr +a
 - **~/.profile**: mode 0644 but user: root + group: root
 - **~/.ssh folder**: mode 0700
 - **~/.ssh/authorized_keys**: mode 0600
