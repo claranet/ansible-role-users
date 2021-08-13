@@ -46,7 +46,7 @@ def test_claranet1_bash_history_file(host):
     assert file.is_file
     assert file.user == user_name
     assert file.group == user_name
-    assert file.mode == 0o644
+    assert file.mode == 0o600
     assert 'a' in host.check_output(f'lsattr {file_name}')[:19]
 
 def test_claranet2_profile_file(host):
@@ -69,7 +69,7 @@ def test_claranet2_bash_history_file(host):
     assert file.is_file
     assert file.user == user_name
     assert file.group == 'adm'
-    assert file.mode == 0o644
+    assert file.mode == 0o600
     assert 'a' in host.check_output(f'lsattr {file_name}')[:19]
 
 def test_installed_packages(host):
