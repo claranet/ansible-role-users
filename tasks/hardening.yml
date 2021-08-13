@@ -9,6 +9,9 @@
     path: "~{{ item.key }}/.bash_history"
     attr: -a
     state: touch
+    owner: "{{ item.key }}"
+    group: "{{ item.value.group | default(item.key) }}"
+    mode: "0644"
   changed_when: false
   when:
     - history.stat.exists
@@ -22,6 +25,7 @@
     state: touch
     owner: "{{ item.key }}"
     group: "{{ item.value.group | default(item.key) }}"
+    mode: "0644"
   changed_when: false
   when: status == "set_bash"
 
