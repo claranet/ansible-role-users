@@ -22,6 +22,9 @@ platforms:
   - <<: *default_image
     name: claranet_users_debian-10
     image: debian:10
+  - <<: *default_image
+    name: claranet_users_amazon-latest
+    image: amazonlinux:latest
 provisioner:
   name: ansible
   env:

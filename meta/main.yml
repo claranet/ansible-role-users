@@ -11,4 +11,18 @@ galaxy_info:
 
   galaxy_tags: ['claranet', 'users']
 
+  platforms:
+    - name: EL
+      versions:
+        - all
+    - name: Amazon
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - all
+
 dependencies: []

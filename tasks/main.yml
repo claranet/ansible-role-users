@@ -1,6 +1,6 @@
 ---
-- name: Include OS specific tasks
-  include_tasks: "{{ loop_distribution }}"
+- name: Add OS specific variables
+  include_vars: "{{ loop_vars }}"
   with_first_found:
     - files:
         - "{{ ansible_distribution | lower }}-{{ ansible_distribution_version }}.yml"
@@ -8,8 +8,19 @@
         - "{{ ansible_distribution | lower }}.yml"
         - "{{ ansible_os_family | lower }}.yml"
         - "{{ ansible_system | lower }}.yml"
+      paths:
+        - "vars"
+      skip: true
   loop_control:
-    loop_var: loop_distribution
+    loop_var: loop_vars
+
+- name: "Update APT sources"
+  apt:
+    update_cache: true
+  tags:
+    - molecule-idempotence-notest
+  when:
+    - ansible_pkg_mgr == "apt"
 
 # install packages
 - include_tasks: install.yml
