@@ -6,7 +6,8 @@
     group: "{{ item.value.group | default(item.key) }}"
     mode: 0700
     state: directory
-  when: "'authorized_keys' in item.value"
+  when: ("'authorized_keys' in item.value") or
+        ("'ssh_config' in item.value")
 
 - name: "configure_ssh | ~{{ item.key }}/.ssh/authorized_keys"
   template:

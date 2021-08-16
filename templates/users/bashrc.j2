@@ -6,6 +6,6 @@
 {{ line }}
 {% endfor %}
 
-{% for line in item.value.bashrc %}
+{% for line in item.value|selectattr("bashrc", "defined")|list %}
 {{ line }}
 {% endfor %}

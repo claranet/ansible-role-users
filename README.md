@@ -1,5 +1,5 @@
 # Ansible role - users
-[![Maintainer](https://img.shields.io/badge/maintained%20by-claranet-red?style=flat-square)](https://www.claranet.fr/)
+[![Maintainer](https://img.shields.io/badge/maintained%20by-claranet-e00000?style=flat-square)](https://www.claranet.fr/)
 [![License](https://img.shields.io/github/license/claranet/ansible-role-users?style=flat-square)](LICENSE)
 [![Release](https://img.shields.io/github/v/release/claranet/ansible-role-users?style=flat-square)](https://github.com/claranet/ansible-role-users/releases)
 [![Status](https://img.shields.io/github/workflow/status/claranet/ansible-role-users/Detectors?style=flat-square&label=tests)](https://github.com/claranet/ansible-role-users/actions?query=workflow%3AMolecule)

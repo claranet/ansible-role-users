@@ -6,6 +6,6 @@
 {{ line }}
 {% endfor %}
 
-{% for line in item.value.vimrc %}
+{% for line in item.value|selectattr("vimrc", "defined")|list %}
 {{ line }}
 {% endfor %}

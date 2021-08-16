@@ -1,0 +1,11 @@
+---
+- name: Cleanup
+  hosts: all
+  become: true
+  become_user: root
+  gather_facts: false
+  tasks:
+    - include_tasks: "{{ playbook_dir }}/docker-cleanup/main.yml"
+      loop:
+        - claranet1
+        - claranet2

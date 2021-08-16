@@ -1,0 +1,16 @@
+---
+- name: "ensure ~{{ item }}/.bash_history exists"
+  stat:
+    path: "~{{ item }}/.bash_history"
+  ignore_unreachable: true
+  register: history
+
+- name: "ensure ~{{ item }}/.bash_history is NOT immutable"
+  file:
+    path: "~{{ item }}/.bash_history"
+    attr: -a
+    state: touch
+  changed_when: false
+  when:
+    - history is succeeded
+    - history.stat.exists | default(false)

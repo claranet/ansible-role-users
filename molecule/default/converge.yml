@@ -1,7 +1,25 @@
 ---
 - name: Converge
   hosts: all
-  tasks:
-    - name: "Include users"
-      include_role:
-        name: "users"
+  become: true
+  become_user: root
+  roles:
+    - role: claranet.users
+      vars:
+        users:
+          claranet1:
+            home: /home/claranet1
+            group: claranet1
+            password: "*"
+            bashrc:
+              - 'export PS1=''\[\033[01;31m\]\u\[\033[00m\]@$(hostname -f) \[\033[01;34m\]\w \$\[\033[00m\] '''
+            vimrc:
+              - "color desert"
+            ssh_config:
+              'mysrv*':
+                identityFile: /home/claranet1/.ssh/user
+
+          claranet2:
+            group: adm
+            groups:
+              - daemon
