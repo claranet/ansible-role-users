@@ -14,7 +14,7 @@
   loop_control:
     loop_var: loop_vars
 
-- name: "Update APT sources"
+- name: "Update APT cache"
   apt:
     update_cache: true
   tags:
