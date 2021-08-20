@@ -86,6 +86,13 @@ See [tasks/install.yml](tasks/install.yml).
         ssh_config:
           'mysrv*':
             identityFile: /home/user/.ssh/user
+        # ssh_keys:
+        #   id_rsa:
+        #     public: 'ssh-rsa '
+        #     private: |
+        #       -----BEGIN OPENSSH PRIVATE KEY-----
+        #       b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABFwAAAAdzc2gtcn
+        #       -----END OPENSSH PRIVATE KEY-----
 ```
 
 ## :closed_lock_with_key: [Hardening](HARDENING.md)

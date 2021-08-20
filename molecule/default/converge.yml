@@ -18,7 +18,13 @@
             ssh_config:
               'mysrv*':
                 identityFile: /home/claranet1/.ssh/user
-
+            ssh_keys:
+              id_rsa:
+                public: 'ssh-rsa xxxpublic'
+                private: |
+                  -----BEGIN OPENSSH PRIVATE KEY-----
+                  xxxprivate
+                  -----END OPENSSH PRIVATE KEY-----
           claranet2:
             group: adm
             groups:

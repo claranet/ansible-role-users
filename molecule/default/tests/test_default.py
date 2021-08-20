@@ -61,6 +61,25 @@ def test_claranet2_profile_file(host):
     assert file.contains('readonly HISTFILE')
     assert file.contains('export SHELL=/bin/bash')
 
+def test_claranet1_ssh_pubkeys(host):
+    user_name = 'claranet1'
+    file_name_public = f'/home/{user_name}/.ssh/id_rsa.pub'
+    file_name_private = f'/home/{user_name}/.ssh/id_rsa'
+    file_public = host.file(file_name_public)
+    file_private = host.file(file_name_private)
+    assert file_public.exists
+    assert file_public.is_file
+    assert file_public.user == 'claranet1'
+    assert file_public.group == 'claranet1'
+    assert file_public.mode == 0o600
+    assert file_public.contains('xxxpublic')
+    assert file_private.exists
+    assert file_private.is_file
+    assert file_private.user == 'claranet1'
+    assert file_private.group == 'claranet1'
+    assert file_private.mode == 0o600
+    assert file_private.contains('xxxprivate')
+
 def test_claranet2_bash_history_file(host):
     user_name = 'claranet2'
     file_name = f'/home/{user_name}/.bash_history'
