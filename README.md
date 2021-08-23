@@ -77,7 +77,7 @@ See [tasks/install.yml](tasks/install.yml).
         home: /root
         group: wheel
         password: "*"
-        # authorized_keys: []
+        authorized_keys: ["ssh-rsa xxx"]
         bashrc:
           - 'export PS1=''\[\033[01;31m\]\u\[\033[00m\]@$(hostname -f) \[\033[01;34m\]\w \$\[\033[00m\] '''
         vimrc:
@@ -86,6 +86,13 @@ See [tasks/install.yml](tasks/install.yml).
         ssh_config:
           'mysrv*':
             identityFile: /home/user/.ssh/user
+        ssh_keys:
+          id_rsa:
+            public: 'ssh-rsa '
+            private: |
+              -----BEGIN OPENSSH PRIVATE KEY-----
+              b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABFwAAAAdzc2gtcn
+              -----END OPENSSH PRIVATE KEY-----
 ```
 
 ## :closed_lock_with_key: [Hardening](HARDENING.md)
