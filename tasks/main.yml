@@ -1,12 +1,13 @@
 ---
-- name: Add OS specific variables
+- name: Gather OS specific variables
   include_vars: "{{ loop_vars }}"
   with_first_found:
     - files:
-        - "{{ ansible_distribution | lower }}-{{ ansible_distribution_version }}.yml"
-        - "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version }}.yml"
-        - "{{ ansible_distribution | lower }}.yml"
-        - "{{ ansible_os_family | lower }}.yml"
+        - "{{ ansible_distro }}-{{ ansible_distro_version }}.yml"
+        - "{{ ansible_distro }}-{{ ansible_distro_release }}.yml"
+        - "{{ ansible_distro }}-{{ ansible_distro_major_version }}.yml"
+        - "{{ ansible_distro }}.yml"
+        - "{{ ansible_os_family|lower }}-family.yml"
         - "{{ ansible_system | lower }}.yml"
       paths:
         - "vars"

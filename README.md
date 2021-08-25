@@ -69,8 +69,10 @@ See [tasks/install.yml](tasks/install.yml).
 ```yaml
 ---
 - hosts: all
+  become: true
+  become_user: root
   roles:
-    - users
+    - claranet.users
   vars:
     users:
       root:
