@@ -1,30 +1,24 @@
 ---
-.default_image: &default_image
-  privileged: true
-  tty: true
-  volumes:
-    - "/sys/fs/cgroup:/sys/fs/cgroup:rw"
-    - "/var/run/docker.sock:/var/run/docker.sock:ro"
-  stop_signal: "SIGRTMIN+3"
-  capabilities:
-    - SYS_ADMIN
-    - SYS_TIME
-    - LINUX_IMMUTABLE
-
 dependency:
   name: galaxy
+
 driver:
   name: docker
+
 platforms:
-  - <<: *default_image
-    name: claranet_users_centos-8
-    image: centos:8
-  - <<: *default_image
-    name: claranet_users_debian-10
-    image: debian:10
-  - <<: *default_image
-    name: claranet_users_amazon-latest
-    image: amazonlinux:latest
+  - name: claranet_users_${image:-debian}-${tag:-latest}
+    image: ${image:-debian}:${tag:-latest}
+    privileged: true
+    tty: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:rw"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    stop_signal: "SIGRTMIN+3"
+    capabilities:
+      - SYS_ADMIN
+      - SYS_TIME
+      - LINUX_IMMUTABLE
+
 provisioner:
   name: ansible
   env:
@@ -34,6 +28,7 @@ provisioner:
   playbooks:
     docker:
       cleanup: docker-cleanup.yml
+
 verifier:
   name: testinfra
   lint:
@@ -41,5 +36,8 @@ verifier:
   options:
     verbose: true
     s: true
+
 lint: |
+  set -e
+  yamllint .
   ansible-lint
