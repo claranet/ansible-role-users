@@ -36,8 +36,8 @@ jobs:
             tag: "11"
           - image: "debian"
             tag: "10"
-          - image: "20.04"
-            tag: "latest"
+          - image: "ubuntu"
+            tag: "20.04"
     steps:
       - name: checkout
         uses: actions/checkout@v2
