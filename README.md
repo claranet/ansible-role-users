@@ -91,10 +91,7 @@ See [tasks/install.yml](tasks/install.yml).
         ssh_keys:
           id_rsa:
             public: 'ssh-rsa '
-            private: |
-              -----BEGIN OPENSSH PRIVATE KEY-----
-              b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABFwAAAAdzc2gtcn
-              -----END OPENSSH PRIVATE KEY-----
+            private: "{{ lookup('community.hashi_vault.hashi_vault', 'secret/ssh:private_key') }}"
 ```
 
 ## :closed_lock_with_key: [Hardening](HARDENING.md)
