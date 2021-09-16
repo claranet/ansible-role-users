@@ -1,6 +1,5 @@
 ---
 - name: "install | requisites packages"
   package:
-    name: "{{ item }}"
+    name: "{{ _packages }}"
     state: present
-  loop: "{{ _packages }}"
