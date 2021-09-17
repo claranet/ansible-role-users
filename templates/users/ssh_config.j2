@@ -2,7 +2,7 @@
 # {{ ansible_managed }}
 #
 
-{% for (host_entry,cfg) in item.value.ssh_config.items() %}
+{% for (host_entry, cfg) in item.value.ssh_config.items() %}
 host {{host_entry}}
   {% for (k,v) in cfg.items() %}
   {{k}} {{v}}

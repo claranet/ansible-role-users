@@ -1,2 +1,2 @@
 ---
-_packages: "{{ packages + ['shadow-utils'] }}"
+_users_packages: "{{ users_packages + ['shadow-utils'] }}"

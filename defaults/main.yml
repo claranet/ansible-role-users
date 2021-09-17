@@ -5,43 +5,44 @@
 users: {}
 
 ## packages to install
-packages: ["bash", "bash-completion", "vim", "e2fsprogs"]
+users_packages: ["bash", "bash-completion", "vim", "e2fsprogs"]
 
 ## custom dotfiles
-user_bashrc_template: "users/bashrc.j2"
-user_ssh_config_template: "users/ssh_config.j2"
-user_vimrc_template: "users/vimrc.j2"
-user_profile_template: "users/profile.j2"
+users_bashrc_template: "users/bashrc.j2"
+users_ssh_config_template: "users/ssh_config.j2"
+users_vimrc_template: "users/vimrc.j2"
+users_profile_template: "users/profile.j2"
+users_authorized_keys_template: "users/authorized_keys.j2"
 
 ## dotfiles management
 
 ### umask management
-umask: "022"
+users_umask: "022"
 
 ### global env vars
-lang: "POSIX"
-editor: "vim"
-shell: "/bin/bash"
-ls_options: "--color=auto"
+users_lang: "POSIX"
+users_editor: "vim"
+users_shell: "/bin/bash"
+users_ls_options: "--color=auto"
 
 ### bashrc vars
-bashrc_histcontrol: "ignoreboth"
-bashrc_histsize: "5000"
-bashrc_histfilesize: "20000"
-bashrc_histtimeformat: "%d-%m-%y %T "
+users_bashrc_histcontrol: "ignoreboth"
+users_bashrc_histsize: "5000"
+users_bashrc_histfilesize: "20000"
+users_bashrc_histtimeformat: "%d-%m-%y %T "
 
 ### bashrc management
-user_default_bashrc:
+users_default_bashrc:
   - '# default umask'
-  - umask {{ umask }}
+  - umask {{ users_umask }}
   - '# env vars'
-  - export LANG={{ lang }}
-  - export EDITOR={{ editor }}
-  - export LS_OPTIONS={{ ls_options }}
-  - export HISTCONTROL={{ bashrc_histcontrol }}
-  - export HISTSIZE={{ bashrc_histsize }}
-  - export HISTFILESIZE={{ bashrc_histfilesize }}
-  - export HISTTIMEFORMAT="{{ bashrc_histtimeformat }}"
+  - export LANG={{ users_lang }}
+  - export EDITOR={{ users_editor }}
+  - export LS_OPTIONS={{ users_ls_options }}
+  - export HISTCONTROL={{ users_bashrc_histcontrol }}
+  - export HISTSIZE={{ users_bashrc_histsize }}
+  - export HISTFILESIZE={{ users_bashrc_histfilesize }}
+  - export HISTTIMEFORMAT="{{ users_bashrc_histtimeformat }}"
   - '# aliases'
   - eval `dircolors -b`
   - alias ls='ls $LS_OPTIONS'
@@ -49,7 +50,7 @@ user_default_bashrc:
   - alias l=ll
   - alias tailf='tail -f'
 
-user_default_vimrc:
+users_default_vimrc:
   - '" standard'
   - set paste
   - set noai
@@ -59,8 +60,8 @@ user_default_vimrc:
   - '" color'
   - syntax on
 
-user_default_profile:
+users_default_profile:
   - '# lock histfile'
   - readonly HISTFILE
   - '# default shell'
-  - export SHELL={{ shell }}
+  - export SHELL={{ users_shell }}

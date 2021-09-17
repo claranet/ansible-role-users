@@ -4,4 +4,4 @@ ansible_distro_version: "{{ ansible_distribution_version|lower|replace('/', '_')
 ansible_distro_release: "{{ ansible_distribution_release|lower }}"
 ansible_distro_major_version: "{{ ansible_distribution_major_version|lower|replace('/', '_') }}"
 
-_packages: "{{ packages }}"
+_users_packages: "{{ users_packages }}"

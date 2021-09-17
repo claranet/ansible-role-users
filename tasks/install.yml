@@ -1,5 +1,5 @@
 ---
 - name: "install | requisites packages"
   package:
-    name: "{{ _packages }}"
+    name: "{{ _users_packages }}"
     state: present

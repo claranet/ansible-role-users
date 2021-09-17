@@ -24,41 +24,41 @@ ansible-galaxy install claranet.users
 
 ### Users
 Variable | Default value | Description
----------|---------------|------------
-users_default (or users) | **{}** | Create groups, users and enable bashrc, ssh/config, vimrc and profile files
+---------|---------------|----------------------------------------------------------------------------
+users    | **{}**        | Create groups, users and enable bashrc, ssh/config, vimrc and profile files
 
 > Please note that we need to chattr -a the .bash_history file in order to manage groups changes !
 
 ### Packages
-Variable | Default value | Description
----------|---------------|------------
-packages | **["bash","bash-completion","vim","e2fsprogs"]** | List of required packages for users
+Variable       | Default value                                    | Description
+---------------|--------------------------------------------------|------------------------------------
+users_packages | **["bash","bash-completion","vim","e2fsprogs"]** | List of required packages for users
 
 ### Global variables
-Variable | Default value | Description
----------|---------------|------------
-umask | **022** | Default umask for files created by users
-lang | **POSIX** | Default lang variable
-editor | **vim** | Default editor is vim
-ls_options | **--color=auto** | Default ls options
+Variable         | Default value    | Description
+-----------------|------------------|-----------------------------------------
+users_umask      | **022**          | Default umask for files created by users
+users_lang       | **POSIX**        | Default lang variable
+users_editor     | **vim**          | Default editor is vim
+users_ls_options | **--color=auto** | Default ls options
 
 ### Dotfiles
-Variable | Default value | Description
----------|---------------|------------
-user_default_bashrc | defaults/main.yml | Manage .bashrc file content
-user_default_vimrc | defaults/main.yml | Manage .vimrc file content
-user_default_profile | defaults/main.yml | Manage .profile file content
-bashrc_histcontrol | **ignoreboth** |Set HISTCONTROL variable
-bashrc_histsize | **5000** | Set HISTSIZE variable
-bashrc_histfilesize | **20000** | Set HISTFILESIZE variable
-bashrc_histtimeformat | **%d-%m-%y %T** | Set HISTTIMEFORMAT variable
-user_bashrc_template | **users/bashrc.j2** | Configures ~/.bashrc
-user_ssh_config_template | **users/ssh_config.j2** | Configures ~/.ssh/config
-user_vimrc_template | **users/vimrc.j2** | Configures ~/.vimrc
-user_profile_template | **users/profile.j2** | Configures ~/.profile
+Variable                    | Default value           | Description
+----------------------------|-------------------------|-----------------------------
+users_default_bashrc        | defaults/main.yml       | Manage .bashrc file content
+users_default_vimrc         | defaults/main.yml       | Manage .vimrc file content
+users_default_profile       | defaults/main.yml       | Manage .profile file content
+users_bashrc_histcontrol    | **ignoreboth**          |Set HISTCONTROL variable
+users_bashrc_histsize       | **5000**                | Set HISTSIZE variable
+users_bashrc_histfilesize   | **20000**               | Set HISTFILESIZE variable
+users_bashrc_histtimeformat | **%d-%m-%y %T**         | Set HISTTIMEFORMAT variable
+users_bashrc_template       | **users/bashrc.j2**     | Configures ~/.bashrc
+users_ssh_config_template   | **users/ssh_config.j2** | Configures ~/.ssh/config
+users_vimrc_template        | **users/vimrc.j2**      | Configures ~/.vimrc
+users_profile_template      | **users/profile.j2**    | Configures ~/.profile
 
-> Dotfiles (bashrc, ssh/config, vimrc, profile) are not enabled by default. You need to defined them explicitly
-> in the wanted user. (See example below).
+> Dotfiles (bashrc, ssh/config, vimrc, profile) are not enabled by default.
+> You need to define them explicitly in the wanted user. (See example below).
 
 ## :arrows_counterclockwise: Dependencies
 

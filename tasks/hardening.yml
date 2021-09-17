@@ -2,7 +2,7 @@
 - name: "hardening | ensure ~{{ item.key }}/.bash_history exists"
   stat:
     path: "~{{ item.key }}/.bash_history"
-  register: history
+  register: _users_history
 
 - name: "hardening | ensure ~{{ item.key }}/.bash_history is NOT immutable"
   file:
@@ -14,9 +14,9 @@
     mode: "0600"
   changed_when: false
   when:
-    - history.stat.exists
-    - status == "unset" or
-      status == "set_bash"
+    - _users_history.stat.exists
+    - _users_status == "unset" or
+      _users_status == "set_bash"
 
 - name: "hardening | ensure ~{{ item.key }}/.bash_history is immutable"
   file:
@@ -27,15 +27,15 @@
     group: "{{ item.value.group | default(item.key) }}"
     mode: "0600"
   changed_when: false
-  when: status == "set_bash"
+  when: _users_status == "set_bash"
 
 - name: "hardening | ~{{ item.key }}/.profile"
   template:
-    src: "{{ user_profile_template }}"
+    src: "{{ users_profile_template }}"
     dest: "~{{ item.key }}/.profile"
     owner: "root"
     group: "root"
     mode: 0644
   when:
-    - (item.value|selectattr("profile", "defined")|list|length > 0) or (user_default_profile|length > 0)
-    - status == "set_profile"
+    - (item.value|selectattr("profile", "defined")|list|length > 0) or (users_default_profile|length > 0)
+    - _users_status == "set_profile"

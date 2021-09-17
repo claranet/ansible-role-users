@@ -2,4 +2,4 @@
 - name: "configure_profile | include hardening.yml"
   include_tasks: hardening.yml
   vars:
-    status: "set_profile"
+    _users_status: "set_profile"

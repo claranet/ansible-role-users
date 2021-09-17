@@ -1,7 +1,7 @@
 ---
 - name: "configure_vim | ~{{ item.key }}/.vimrc"
   template:
-    src: "{{ user_vimrc_template }}"
+    src: "{{ users_vimrc_template }}"
     dest: "~{{ item.key }}/.vimrc"
     owner: "{{ item.key }}"
     group: "{{ item.value.group | default(item.key) }}"

@@ -30,7 +30,7 @@ if [ -d "$HOME/.local/bin" ] ; then
 PATH="$HOME/.local/bin:$PATH"
 fi
 
-{% for line in user_default_profile %}
+{% for line in users_default_profile %}
 {{ line }}
 {% endfor %}
 

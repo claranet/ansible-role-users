@@ -2,7 +2,7 @@
 - name: "create_users | include hardening.yml"
   include_tasks: hardening.yml
   vars:
-    status: "unset"
+    _users_status: "unset"
 
 - name: "create_users | create user {{ item.key }}"
   user:
