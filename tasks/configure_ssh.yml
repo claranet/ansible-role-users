@@ -38,7 +38,9 @@
   loop: "{{ item.value.ssh_keys | dict2items }}"
   loop_control:
     loop_var: ssh_keys
-  when: "'public' in ssh_keys.value"
+  when:
+    - "'ssh_keys' in item.value"
+    - "'public' in ssh_keys.value"
 
 - name: "configure_ssh | adding a private key to ssh folder for ~{{ item.key }}"
   copy:
@@ -50,4 +52,6 @@
   loop: "{{ item.value.ssh_keys | dict2items }}"
   loop_control:
     loop_var: ssh_keys
-  when: "'private' in ssh_keys.value"
+  when:
+    - "'ssh_keys' in item.value"
+    - "'private' in ssh_keys.value"
