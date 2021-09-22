@@ -1,7 +1,7 @@
 ---
 exclude_paths:
   - molecule/
-  - .pr-commit-config.yaml
+  - .pre-commit-config.yaml
 
 parseable: true
 
