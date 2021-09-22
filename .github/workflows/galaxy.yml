@@ -4,9 +4,6 @@ name: Import role on Ansible Galaxy
 on:  # yamllint disable-line rule:truthy
   release:
     types:
-      - created
-      - edited
-      - published
       - released
 jobs:
   release:
