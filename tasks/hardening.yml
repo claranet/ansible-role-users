@@ -4,7 +4,7 @@
     path: "~{{ item.key }}/.bash_history"
   register: _users_history
 
-- name: "hardening | ensure ~{{ item.key }}/.bash_history is NOT immutable"
+- name: "hardening | ensure ~{{ item.key }}/.bash_history is NOT in append only mode"
   file:
     path: "~{{ item.key }}/.bash_history"
     attr: -a
@@ -18,7 +18,7 @@
     - _users_status == "unset" or
       _users_status == "set_bash"
 
-- name: "hardening | ensure ~{{ item.key }}/.bash_history is immutable"
+- name: "hardening | ensure ~{{ item.key }}/.bash_history content cannot be tampered with"
   file:
     path: "~{{ item.key }}/.bash_history"
     attr: a

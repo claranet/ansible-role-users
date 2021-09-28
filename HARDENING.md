@@ -10,7 +10,8 @@ measures.
 - The default shell is **/bin/bash** and is locked in the **~/.profile** file (owner and group: root, mode: 0644), so a
   non-root user can't change this.
 
-- The default history file **~/.bash_history** is unwritable (**chattr +a**). 
+- The content of the default history file **~/.bash_history** cannot be tampered with (**chattr +a** mandates it can only
+  be opened in append mode for writing).
 
 - The **HISTFILE** variable is in **readonly mode** (see **~/.profile**), so a non-root user can't change this
 
