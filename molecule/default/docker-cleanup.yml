@@ -7,5 +7,6 @@
   tasks:
     - include_tasks: "{{ playbook_dir }}/docker-cleanup/main.yml"
       loop:
+        - root
         - claranet1
         - claranet2
