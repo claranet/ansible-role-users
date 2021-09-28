@@ -6,4 +6,4 @@
     owner: "{{ item.key }}"
     group: "{{ item.value.group | default(item.key) }}"
     mode: 0600
-  when: "'vimrc' in item.value"
+  when: (item.value.vimrc is defined and item.value.vimrc|length>0) or users_default_vimrc|length>0

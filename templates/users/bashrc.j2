@@ -2,12 +2,10 @@
 # {{ ansible_managed }}
 #
 
-{% for line in users_default_bashrc %}
+{% for line in users_default_bashrc|mandatory %}
 {{ line }}
 {% endfor %}
 
-{%- if "bashrc" in item.value.keys() %}
-{%- for line in item.value.bashrc %}
+{% for line in item.value.bashrc|default([]) %}
 {{ line }}
 {% endfor %}
-{%- endif %}

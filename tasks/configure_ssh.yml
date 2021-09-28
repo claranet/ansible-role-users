@@ -6,9 +6,9 @@
     group: "{{ item.value.group | default(item.key) }}"
     mode: 0700
     state: directory
-  when: ("'authorized_keys' in item.value") or
-        ("'ssh_config' in item.value") or
-        ("'ssh_keys' in item.value")
+  when: item.value.authorized_keys is defined or
+        item.value.ssh_config is defined or
+        item.value.ssh_keys is defined
 
 - name: "configure_ssh | ~{{ item.key }}/.ssh/authorized_keys"
   template:
@@ -17,7 +17,7 @@
     owner: "{{ item.key }}"
     group: "{{ item.value.group | default(item.key) }}"
     mode: 0600
-  when: "'authorized_keys' in item.value"
+  when: item.value.authorized_keys is defined
 
 - name: "configure_ssh | ~{{ item.key }}/.ssh/config"
   template:
@@ -26,7 +26,7 @@
     owner: "{{ item.key }}"
     group: "{{ item.value.group | default(item.key) }}"
     mode: 0600
-  when: "'ssh_config' in item.value"
+  when: item.value.ssh_config is defined
 
 - name: "configure_ssh | adding a public key to ssh folder for ~{{ item.key }}"
   copy:
@@ -35,12 +35,10 @@
     owner: "{{ item.key }}"
     group: "{{ item.value.group | default(item.key) }}"
     mode: 0600
-  loop: "{{ item.value.ssh_keys | dict2items }}"
+  loop: "{{ item.value.ssh_keys | default({}) | dict2items }}"
   loop_control:
     loop_var: ssh_keys
-  when:
-    - "'ssh_keys' in item.value"
-    - "'public' in ssh_keys.value"
+  when: ssh_keys.value.public is defined
 
 - name: "configure_ssh | adding a private key to ssh folder for ~{{ item.key }}"
   copy:
@@ -49,9 +47,7 @@
     owner: "{{ item.key }}"
     group: "{{ item.value.group | default(item.key) }}"
     mode: 0600
-  loop: "{{ item.value.ssh_keys | dict2items }}"
+  loop: "{{ item.value.ssh_keys | default({}) | dict2items }}"
   loop_control:
     loop_var: ssh_keys
-  when:
-    - "'ssh_keys' in item.value"
-    - "'private' in ssh_keys.value"
+  when: ssh_keys.value.private is defined

@@ -13,6 +13,29 @@ def test_vim_version(host):
     assert command.rc == 0
 
 
+def test_root_user(host):
+    user = host.user("root")
+    assert user.exists
+    assert user.shell == "/bin/bash"
+    assert user.home == f"/{user.name}"
+    assert user.group == "root"
+    assert "adm" in user.groups
+
+
+def test_root_profile_file(host):
+    user_name = "root"
+    file_name = f"/{user_name}/.profile"
+    file = host.file(file_name)
+    assert file.exists
+    assert file.is_file
+    assert file.user == "root"
+    assert file.group == "root"
+    assert file.mode == 0o644
+    assert file.contains("\nreadonly HISTFILE\n")
+    assert file.contains("\nexport SHELL=/bin/bash\n")
+    assert file.contains("\nexport LANG=POSIX\n")
+
+
 def test_claranet1_user(host):
     user = host.user("claranet1")
     assert user.exists

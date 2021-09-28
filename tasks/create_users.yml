@@ -10,7 +10,7 @@
     append: "{{ item.value.append | default(true if item.value.groups|default([])|length > 0 else omit) }}"
     shell: "{{ item.value.shell | default('/bin/bash') }}"
     createhome: "{{ item.value.createhome | default(true) }}"
-    home: "{{ item.value.home | default('/home/' + item.key) }}"
+    home: "{{ '/root' if item.key == 'root' else (item.value.home | default('/home/' + item.key)) }}"
     password: "{{ item.value.password | default('*') }}"
     uid: "{{ item.value.uid | default(omit) }}"
     group: "{{ item.value.group | default(omit) }}"

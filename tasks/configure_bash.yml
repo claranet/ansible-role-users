@@ -5,7 +5,7 @@
     owner: "{{ item.key }}"
     group: "{{ item.value.group | default(item.key) }}"
     mode: 0600
-  when: "'bashrc' in item.value"
+  when: (item.value.bashrc is defined and item.value.bashrc|length>0) or users_default_bashrc|length>0
 
 - name: "configure_bash | include hardening.yml"
   include_tasks: hardening.yml

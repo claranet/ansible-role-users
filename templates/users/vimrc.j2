@@ -2,12 +2,10 @@
 " {{ ansible_managed }}
 "
 
-{% for line in users_default_vimrc %}
+{% for line in users_default_vimrc|mandatory %}
 {{ line }}
 {% endfor %}
 
-{%- if "vimrc" in item.value.keys() %}
-{%- for line in item.value.vimrc %}
+{% for line in item.value.vimrc|default([]) %}
 {{ line }}
 {% endfor %}
-{%- endif %}
