@@ -6,6 +6,8 @@
 {{ line }}
 {% endfor %}
 
-{% for line in item.value|selectattr("bashrc", "defined")|list %}
+{%- if "bashrc" in item.value.keys() %}
+{%- for line in item.value.bashrc %}
 {{ line }}
 {% endfor %}
+{%- endif %}

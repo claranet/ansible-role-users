@@ -30,10 +30,12 @@ if [ -d "$HOME/.local/bin" ] ; then
 PATH="$HOME/.local/bin:$PATH"
 fi
 
-{% for line in users_default_profile %}
+{%- for line in users_default_profile %}
 {{ line }}
-{% endfor %}
+{%- endfor %}
 
-{% for line in item.value|selectattr("profile", "defined")|list %}
+{%- if "profile" in item.value.keys() %}
+{%- for line in item.value.profile %}
 {{ line }}
 {% endfor %}
+{%- endif %}

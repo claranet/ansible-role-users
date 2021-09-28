@@ -39,8 +39,8 @@ def test_claranet1_profile_file(host):
     assert file.user == "root"
     assert file.group == "root"
     assert file.mode == 0o644
-    assert file.contains("readonly HISTFILE")
-    assert file.contains("export SHELL=/bin/bash")
+    assert file.contains("\nreadonly HISTFILE\n")
+    assert file.contains("\nexport SHELL=/bin/bash\n")
 
 
 def test_claranet1_bash_history_file(host):
@@ -55,6 +55,30 @@ def test_claranet1_bash_history_file(host):
     assert "a" in host.check_output(f"lsattr {file_name}")[:19]
 
 
+def test_claranet1_bashrc_file(host):
+    user_name = "claranet1"
+    file_name = f"/home/{user_name}/.bashrc"
+    file = host.file(file_name)
+    assert file.exists
+    assert file.is_file
+    assert file.user == user_name
+    assert file.group == user_name
+    assert file.mode == 0o600
+    assert file.contains('\nalias gc="git commit"\n')
+
+
+def test_claranet1_vimrc_file(host):
+    user_name = "claranet1"
+    file_name = f"/home/{user_name}/.vimrc"
+    file = host.file(file_name)
+    assert file.exists
+    assert file.is_file
+    assert file.user == user_name
+    assert file.group == user_name
+    assert file.mode == 0o600
+    assert file.contains("\ncolor desert\n")
+
+
 def test_claranet2_profile_file(host):
     user_name = "claranet2"
     file_name = f"/home/{user_name}/.profile"
@@ -64,8 +88,8 @@ def test_claranet2_profile_file(host):
     assert file.user == "root"
     assert file.group == "root"
     assert file.mode == 0o644
-    assert file.contains("readonly HISTFILE")
-    assert file.contains("export SHELL=/bin/bash")
+    assert file.contains("\nreadonly HISTFILE\n")
+    assert file.contains("\nexport SHELL=/bin/bash\n")
 
 
 def test_claranet1_ssh_pubkeys(host):

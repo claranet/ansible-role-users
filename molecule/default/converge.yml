@@ -13,6 +13,7 @@
             password: "*"
             bashrc:
               - 'export PS1=''\[\033[01;31m\]\u\[\033[00m\]@$(hostname -f) \[\033[01;34m\]\w \$\[\033[00m\] '''
+              - alias gc="git commit"
             vimrc:
               - "color desert"
             ssh_config:

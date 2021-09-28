@@ -6,6 +6,8 @@
 {{ line }}
 {% endfor %}
 
-{% for line in item.value|selectattr("vimrc", "defined")|list %}
+{%- if "vimrc" in item.value.keys() %}
+{%- for line in item.value.vimrc %}
 {{ line }}
 {% endfor %}
+{%- endif %}
