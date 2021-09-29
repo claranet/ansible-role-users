@@ -18,7 +18,7 @@
     - _users_status == "unset" or
       _users_status == "set_bash"
 
-- name: "hardening | ensure ~{{ item.key }}/.bash_history content cannot be tampered with"
+- name: "hardening | ensure ~{{ item.key }}/.bash_history is in append only mode so that content cannot be tampered with"
   file:
     path: "~{{ item.key }}/.bash_history"
     attr: a
