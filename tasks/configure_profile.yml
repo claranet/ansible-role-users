@@ -1,5 +1,5 @@
 ---
 - name: "configure_profile | include hardening.yml"
-  include_tasks: hardening.yml
+  ansible.builtin.include_tasks: hardening.yml
   vars:
     _users_status: "set_profile"

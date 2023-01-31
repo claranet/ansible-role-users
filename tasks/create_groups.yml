@@ -1,6 +1,6 @@
 ---
 - name: "create_groups | create group {{ item.value.group | default('') }}"
-  group:
+  ansible.builtin.group:
     name: "{{ item.value.group }}"
     gid: "{{ item.value.gid | default(omit) }}"
   when: item.value.group is defined

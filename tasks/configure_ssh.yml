@@ -1,6 +1,6 @@
 ---
 - name: "configure_ssh | ~{{ item.key }}/.ssh/"
-  file:
+  ansible.builtin.file:
     path: "~{{ item.key }}/.ssh/"
     owner: "{{ item.key }}"
     group: "{{ item.value.group | default(item.key) }}"
@@ -11,7 +11,7 @@
         item.value.ssh_keys is defined
 
 - name: "configure_ssh | ~{{ item.key }}/.ssh/authorized_keys"
-  template:
+  ansible.builtin.template:
     dest: "~{{ item.key }}/.ssh/authorized_keys"
     src: "{{ users_authorized_keys_template }}"
     owner: "{{ item.key }}"
@@ -20,7 +20,7 @@
   when: item.value.authorized_keys is defined
 
 - name: "configure_ssh | ~{{ item.key }}/.ssh/config"
-  template:
+  ansible.builtin.template:
     src: "{{ users_ssh_config_template }}"
     dest: "~{{ item.key }}/.ssh/config"
     owner: "{{ item.key }}"
@@ -29,7 +29,7 @@
   when: item.value.ssh_config is defined
 
 - name: "configure_ssh | adding a public key to ssh folder for ~{{ item.key }}"
-  copy:
+  ansible.builtin.copy:
     content: "{{ ssh_keys.value.public }}"
     dest: "~{{ item.key }}/.ssh/{{ ssh_keys.key }}.pub"
     owner: "{{ item.key }}"
@@ -42,7 +42,7 @@
   when: ssh_keys.value.public is defined
 
 - name: "configure_ssh | adding a private key to ssh folder for ~{{ item.key }}"
-  copy:
+  ansible.builtin.copy:
     content: "{{ ssh_keys.value.private }}"
     dest: "~{{ item.key }}/.ssh/{{ ssh_keys.key }}"
     owner: "{{ item.key }}"

@@ -1,6 +1,6 @@
 ---
 - name: "configure_vim | ~{{ item.key }}/.vimrc"
-  template:
+  ansible.builtin.template:
     src: "{{ users_vimrc_template }}"
     dest: "~{{ item.key }}/.vimrc"
     owner: "{{ item.key }}"

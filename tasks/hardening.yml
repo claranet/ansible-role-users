@@ -1,11 +1,11 @@
 ---
 - name: "hardening | ensure ~{{ item.key }}/.bash_history exists"
-  stat:
+  ansible.builtin.stat:
     path: "~{{ item.key }}/.bash_history"
   register: _users_history
 
 - name: "hardening | ensure ~{{ item.key }}/.bash_history is NOT in append only mode"
-  file:
+  ansible.builtin.file:
     path: "~{{ item.key }}/.bash_history"
     attr: -a
     state: touch
@@ -19,7 +19,7 @@
       _users_status == "set_bash"
 
 - name: "hardening | ensure ~{{ item.key }}/.bash_history is in append only mode so that content cannot be tampered with"
-  file:
+  ansible.builtin.file:
     path: "~{{ item.key }}/.bash_history"
     attr: a
     state: touch
@@ -30,7 +30,7 @@
   when: _users_status == "set_bash"
 
 - name: "hardening | ~{{ item.key }}/.profile"
-  template:
+  ansible.builtin.template:
     src: "{{ users_profile_template }}"
     dest: "~{{ item.key }}/.profile"
     owner: "root"

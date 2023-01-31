@@ -1,5 +1,5 @@
 - name: "configure_bash | ~{{ item.key }}/.bashrc"
-  template:
+  ansible.builtin.template:
     src: "{{ users_bashrc_template }}"
     dest: "~{{ item.key }}/.bashrc"
     owner: "{{ item.key }}"
@@ -8,6 +8,6 @@
   when: (item.value.bashrc is defined and item.value.bashrc|length>0) or users_default_bashrc|length>0
 
 - name: "configure_bash | include hardening.yml"
-  include_tasks: hardening.yml
+  ansible.builtin.include_tasks: hardening.yml
   vars:
     _users_status: "set_bash"

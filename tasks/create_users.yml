@@ -1,13 +1,13 @@
 ---
 - name: "create_users | include hardening.yml"
-  include_tasks: hardening.yml
+  ansible.builtin.include_tasks: hardening.yml
   vars:
     _users_status: "unset"
 
 - name: "create_users | create user {{ item.key }}"
-  user:
+  ansible.builtin.user:
     name: "{{ item.key }}"
-    append: "{{ item.value.append | default(true if item.value.groups|default([])|length > 0 else omit) }}"
+    append: "{{ item.value.append | default(true if item.value.groups | default([]) | length > 0 else omit) }}"
     shell: "{{ item.value.shell | default('/bin/bash') }}"
     createhome: "{{ item.value.createhome | default(true) }}"
     home: "{{ '/root' if item.key == 'root' else (item.value.home | default('/home/' + item.key)) }}"
