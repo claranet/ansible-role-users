@@ -1,4 +1,4 @@
-- name: "configure_bash | ~{{ item.key }}/.bashrc"
+- name: "configure_bash | ~{{ item.key }}/.bashrc"   # noqa name
   ansible.builtin.template:
     src: "{{ users_bashrc_template }}"
     dest: "~{{ item.key }}/.bashrc"

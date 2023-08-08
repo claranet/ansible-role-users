@@ -1,5 +1,5 @@
 ---
-- name: "configure_ssh | ~{{ item.key }}/.ssh/"
+- name: "configure_ssh | ~{{ item.key }}/.ssh/"   # noqa name
   ansible.builtin.file:
     path: "~{{ item.key }}/.ssh/"
     owner: "{{ item.key }}"
@@ -10,7 +10,7 @@
         item.value.ssh_config is defined or
         item.value.ssh_keys is defined
 
-- name: "configure_ssh | ~{{ item.key }}/.ssh/authorized_keys"
+- name: "configure_ssh | ~{{ item.key }}/.ssh/authorized_keys"   # noqa name
   ansible.builtin.template:
     dest: "~{{ item.key }}/.ssh/authorized_keys"
     src: "{{ users_authorized_keys_template }}"
@@ -19,7 +19,7 @@
     mode: 0600
   when: item.value.authorized_keys is defined
 
-- name: "configure_ssh | ~{{ item.key }}/.ssh/config"
+- name: "configure_ssh | ~{{ item.key }}/.ssh/config"   # noqa name
   ansible.builtin.template:
     src: "{{ users_ssh_config_template }}"
     dest: "~{{ item.key }}/.ssh/config"
