@@ -1,6 +1,7 @@
 ---
 dependency:
-  name: galaxy
+  name: shell
+  command: python3 -m pip install pytest-testinfra
 
 driver:
   name: docker
@@ -20,6 +21,7 @@ platforms:
       - SYS_ADMIN
       - SYS_TIME
       - LINUX_IMMUTABLE
+    command: "/lib/systemd/systemd"
 
 provisioner:
   name: ansible
@@ -27,9 +29,6 @@ provisioner:
     ANSIBLE_FORCE_COLOR: "true"
   options:
     v: true
-  playbooks:
-    docker:
-      cleanup: docker-cleanup.yml
 
 verifier:
   name: testinfra
