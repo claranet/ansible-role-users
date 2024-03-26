@@ -15,3 +15,4 @@
     uid: "{{ item.value.uid | default(omit) }}"
     group: "{{ item.value.group | default(omit) }}"
     groups: "{{ item.value.groups | default(omit) }}"
+    update_password: "{{ item.value.update_password | default(omit) }}"
