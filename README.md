@@ -92,6 +92,7 @@ See [tasks/install.yml](tasks/install.yml).
           id_rsa:
             public: 'ssh-rsa '
             private: "{{ lookup('community.hashi_vault.hashi_vault', 'secret/ssh:private_key') }}"
+        update_password: "on_create"         # default is always
 ```
 
 ## :closed_lock_with_key: [Hardening](HARDENING.md)
