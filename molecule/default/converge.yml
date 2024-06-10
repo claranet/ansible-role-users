@@ -3,8 +3,10 @@
   hosts: all
   become: true
   become_user: root
-  roles:
-    - role: claranet.users
+  tasks:
+    - name: Include role claranet.users
+      ansible.builtin.include_role:
+        name: claranet.users
       vars:
         users:
           root:
@@ -38,3 +40,20 @@
             group: adm
             groups:
               - daemon
+
+    - name: Create tbd user
+      ansible.builtin.include_role:
+        name: claranet.users
+      vars:
+        users:
+          tbd:
+      tags:
+        - molecule-idempotence-notest
+
+    - name: Remove tbd user
+      ansible.builtin.include_role:
+        name: claranet.users
+      vars:
+        users:
+          tbd:
+            state: absent

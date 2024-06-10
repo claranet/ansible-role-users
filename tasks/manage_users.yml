@@ -1,10 +1,10 @@
 ---
-- name: "create_users | include hardening.yml"
+- name: "manage_users | include hardening.yml"
   ansible.builtin.include_tasks: hardening.yml
   vars:
     _users_status: "unset"
 
-- name: "create_users | create user {{ item.key }}"
+- name: "manage_users | {{ 'create' if (item.value.state | default('present')) != 'absent' else 'remove' }} user {{ item.key }}"
   ansible.builtin.user:
     name: "{{ item.key }}"
     append: "{{ item.value.append | default(true if item.value.groups | default([]) | length > 0 else omit) }}"
@@ -16,3 +16,6 @@
     group: "{{ item.value.group | default(omit) }}"
     groups: "{{ item.value.groups | default(omit) }}"
     update_password: "{{ item.value.update_password | default(omit) }}"
+    state: "{{ item.value.state | default('present') }}"
+    remove: "{{ item.value.remove | default(false) }}"
+    comment: "{{ item.value.comment | default(omit) }}"

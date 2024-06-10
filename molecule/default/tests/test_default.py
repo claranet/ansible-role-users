@@ -155,3 +155,16 @@ def test_installed_packages(host):
     else:
         assert host.package("vim").is_installed
     assert host.package("e2fsprogs").is_installed
+
+
+def test_tbd_user(host):
+    user = host.user("tbd")
+    assert not user.exists
+
+
+def test_tbd_home(host):
+    user_name = "tbd"
+    file_name = f"/home/{user_name}"
+    file = host.file(file_name)
+    assert file.exists
+    assert file.is_directory

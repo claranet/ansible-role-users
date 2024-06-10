@@ -23,6 +23,10 @@ ansible-galaxy install claranet.users
 ## :gear: Role variables
 
 ### Users
+
+Users supported attributes are `name`, `append`, `shell`, `createhome`, `home`, `password`, `uid`, `group`, `groups`, `update_password`, `state`, `remove` and `comment`.
+[More informations](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/user_module.html)
+
 Variable | Default value | Description
 ---------|---------------|----------------------------------------------------------------------------
 users    | **{}**        | Create groups, users and enable bashrc, ssh/config, vimrc and profile files

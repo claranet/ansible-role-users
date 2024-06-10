@@ -29,11 +29,11 @@
 - ansible.builtin.include_tasks: install.yml
 
 # create users and groups
-- ansible.builtin.include_tasks: create_groups.yml
+- ansible.builtin.include_tasks: manage_groups.yml
   loop: "{{ users | dict2items }}"
   loop_control:
     label: "{{ item.key }}"
-- ansible.builtin.include_tasks: create_users.yml
+- ansible.builtin.include_tasks: manage_users.yml
   loop: "{{ users | dict2items }}"
   loop_control:
     label: "{{ item.key }}"
@@ -43,15 +43,19 @@
   loop: "{{ users | dict2items }}"
   loop_control:
     label: "{{ item.key }}"
+  when: item.value.state|default("present") != "absent"
 - ansible.builtin.include_tasks: configure_ssh.yml
   loop: "{{ users | dict2items }}"
   loop_control:
     label: "{{ item.key }}"
+  when: item.value.state|default("present") != "absent"
 - ansible.builtin.include_tasks: configure_vim.yml
   loop: "{{ users | dict2items }}"
   loop_control:
     label: "{{ item.key }}"
+  when: item.value.state|default("present") != "absent"
 - ansible.builtin.include_tasks: configure_profile.yml
   loop: "{{ users | dict2items }}"
   loop_control:
     label: "{{ item.key }}"
+  when: item.value.state|default("present") != "absent"

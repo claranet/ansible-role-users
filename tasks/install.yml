@@ -3,3 +3,5 @@
   ansible.builtin.package:
     name: "{{ _users_packages }}"
     state: present
+  tags:
+    - molecule-idempotence-notest
