@@ -1,5 +1,5 @@
 ---
-- name: "create_groups | create group {{ item.value.group | default('') }}"
+- name: "manage_groups | create group {{ item.value.group | default('') }}"
   ansible.builtin.group:
     name: "{{ item.value.group }}"
     gid: "{{ item.value.gid | default(omit) }}"
