@@ -38,3 +38,11 @@
             group: adm
             groups:
               - daemon
+
+          tbd:
+
+    - role: claranet.users
+      vars:
+        users:
+          tbd:
+            state: absent
