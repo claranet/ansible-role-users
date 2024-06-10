@@ -3,4 +3,5 @@
   ansible.builtin.group:
     name: "{{ item.value.group }}"
     gid: "{{ item.value.gid | default(omit) }}"
+    state: "{{ item.value.state | default('present') }}"
   when: item.value.group is defined
