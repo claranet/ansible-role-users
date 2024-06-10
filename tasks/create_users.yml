@@ -16,3 +16,5 @@
     group: "{{ item.value.group | default(omit) }}"
     groups: "{{ item.value.groups | default(omit) }}"
     update_password: "{{ item.value.update_password | default(omit) }}"
+    state: "{{ item.value.state | default('present') }}"
+    remove: "{{ item.value.remove | default(false) }}"
