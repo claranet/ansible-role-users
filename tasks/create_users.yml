@@ -18,3 +18,4 @@
     update_password: "{{ item.value.update_password | default(omit) }}"
     state: "{{ item.value.state | default('present') }}"
     remove: "{{ item.value.remove | default(false) }}"
+    comment: "{{ item.value.comment | default(omit) }}"
