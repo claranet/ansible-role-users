@@ -4,7 +4,7 @@
   vars:
     _users_status: "unset"
 
-- name: "create_users | create user {{ item.key }}"
+- name: "create_users | {{ 'create' if (item.value.state | default('present')) != 'absent' else 'remove' }} user {{ item.key }}"
   ansible.builtin.user:
     name: "{{ item.key }}"
     append: "{{ item.value.append | default(true if item.value.groups | default([]) | length > 0 else omit) }}"
